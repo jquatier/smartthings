@@ -395,8 +395,8 @@ def swapToken()
 	def tokenParams = [
 		grant_type: "authorization_code",
 		code: params.code,
-		client_id: "c1dbf23b-45a7-4855-986f-2ea31804e21e",
-        client_secret: "72fc0ce2-1ce3-4fbf-a7d8-b6cec1310e8d",
+		client_id: appSettings.clientId,
+        client_secret: appSettings.clientSecret,
 		redirect_uri: buildRedirectUrl()
 	]
     
@@ -497,3 +497,4 @@ def toQueryString(Map m)
 
 def getServerUrl() { return "https://graph.api.smartthings.com" }
 def getSmartThingsClientId() {appSettings.sTClientId }  
+
