@@ -34,7 +34,7 @@ metadata {
 
 	tiles {
 		valueTile("temperature", "device.temperature", width: 1, height: 1, canChangeIcon: false) {
-            state("temperature", label: '${currentValue}°', unit:"F", backgroundColors: [
+            state("temperature", label: '${currentValue}°${unit}', unit:"F", backgroundColors: [
                     [value: 31, color: "#153591"],
                     [value: 44, color: "#1e9cbb"],
                     [value: 59, color: "#90d2a7"],
@@ -79,9 +79,14 @@ metadata {
 
 
 // handle commands
-def speak() {
-	log.debug "Executing 'speak'"
-	// TODO: handle 'speak' command
+
+// send speech command 
+
+
+void speak(message) {
+    log.debug "Executing 'speak' using parent SmartApp for ${device.deviceNetworkId}"
+
+    parent.speakChild(device.deviceNetworkId, message)
 }
 
 
@@ -89,7 +94,6 @@ def speak() {
 
 void poll() {
 	log.debug "Executing 'poll' using parent SmartApp for ${device.deviceNetworkId}"
-
     def results =  parent.pollChild(device.deviceNetworkId)
     
     parseEvents(results)	
@@ -120,10 +124,7 @@ def cToF(temp) {
 def refresh() {
 	log.debug "Executing 'refresh'"
 	poll()
+   	
 
     
 }
-
-
-
-
