@@ -208,6 +208,37 @@ def pollChild(deviceId) {
             def result = resp.data.result.data
             log.debug "Result: ${result}"
             return result
+            log.debug "Token: ${atomicState.authToken}"
+
+
+
+
+       }
+
+    }
+  
+}
+
+
+def speakChild(deviceId, message) {
+
+	log.debug "pushing speech"
+    
+   
+				
+    def speakParams= [
+    uri: "https://portal.theubi.com",
+    path: "/v2/ubi/${deviceId}/speak",
+    headers: ["Content-Type": "text/json", "Authorization": "Bearer ${atomicState.authToken}"],
+    query: ["phrase":"${message}","conversation": false]
+    ]
+
+    httpGet(speakParams) { resp ->
+        if(resp.status ==  200) {
+
+            def result = resp.data.result.data
+            log.debug "Result: ${result}"
+           
 
 
 
@@ -497,4 +528,3 @@ def toQueryString(Map m)
 
 def getServerUrl() { return "https://graph.api.smartthings.com" }
 def getSmartThingsClientId() {appSettings.sTClientId }  
-
