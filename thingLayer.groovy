@@ -542,7 +542,7 @@ private device(it, type) {
 
 private logField(evt, Closure c) {
 	
-    httpPostJson(uri: "https://your_server/events/${evt.deviceId}/${evt.name}.json",   body:[device: evt.deviceId, name: evt.name, value: evt.value, date: evt.isoDate, unit: evt.unit]) {
+    httpPostJson(uri: "https://YOUR_FIREBASE_INSTANCE.firebaseio.com/events/${evt.deviceId}/${evt.name}.json",   body:[device: evt.deviceId, name: evt.name, value: evt.value, date: evt.isoDate, unit: evt.unit]) {
         log.debug evt.name+" Event data successfully posted"
     }
 }
