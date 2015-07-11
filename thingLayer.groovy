@@ -177,9 +177,9 @@ mappings {
 			GET: "updateDimmer"
 		]
 	}
-    path("/switches/:id/:command/:level") {
+    path("/dimmers/:id/:command/:level") {
 		action: [
-			GET: "updateSwitch"
+			GET: "updateDimmer"
 		]
 	}
     path("/motions") {
